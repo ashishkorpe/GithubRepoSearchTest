@@ -1,0 +1,17 @@
+<!doctype html>
+<html ng-app="myApp">
+    <head>
+    </head>
+    <body ng-controller="detailsController">
+        <table>
+            <tr ng-repeat="property in details">
+                <td>{{property.full_name}}</td>
+                <td>{{property.private}}</td>
+                <td>{{property.description}}</td>
+                <td>{{property.score}}</td>
+                <td>{{property.language}}</td>
+            </tr>
+        </table>
+       <p>{{message}}</p>
+    </body>
+</html>

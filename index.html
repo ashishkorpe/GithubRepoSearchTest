@@ -1,0 +1,41 @@
+<!doctype html>
+<html ng-app='myApp'>
+    <head>
+        <title>Github Search </title>
+        <meta charset='utf-8'>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
+        <script src="app.js"></script>        
+        <script src="myController.js"></script>
+        <script src="detailsController.js"></script>
+        <link rel="stylesheet" href="styles.css">  
+        <base href=" ">      
+    </head>
+    <body >
+        <div ng-controller="myController">                
+            <h3>Search GitHub repositories : </h3>            
+            <input type="text" ng-model='queryParameter' placeholder="Search for Repositories">
+            <button ng-click='search()'>Search</button> <button ng-click="resetSearch()">Reset</button>  
+                <p>Filters:</p> 
+                <input type="text" ng-model="filterText.stars" placeholder="Filter by stars ">            
+                <input type="text" ng-model="filterText.license.name" placeholder="Filter by license ">
+                <input type="text" ng-model="filterText.forks" placeholder="Filter by forks ">
+                <button ng-click="resetFilters()">Reset Filters</button>
+                <table ng-show='searchStarted' id='repositories'>                
+                        <tr>
+                            <th><a href="#"ng-click="sortBy('name')">Name</a></th>                        
+                            <th><a href="#" ng-click="sortBy('stars')">Stars</a></th>
+                            <th><a href="#" ng-click="sortBy('license.name')">License Name</a></th>
+                            <th><a href="#" ng-click="sortBy('forks')">Forks</a></th>
+                        </tr>                
+                        <tr ng-repeat = "obj in arrays | orderBy: propertyName | filter:filterText">
+                            <td><a href="#details" ng-click="getDetails(obj)">{{obj.name}}</a></td>
+                            <td>{{obj.stars}}</td>
+                            <td>{{obj.license.name}}</td>
+                            <td>{{obj.forks}}</td>
+                        </tr>    
+                </table>        
+            <ng-view></ng-view>
+        </div>
+    </body>
+</html>
